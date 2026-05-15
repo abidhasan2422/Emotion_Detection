@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Emotion Detector</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 700px; margin: 60px auto; padding: 20px; background: #f5f7fa; }
+    h1 { color: #2d3748; text-align: center; }
+    textarea { width: 100%; height: 120px; padding: 12px; font-size: 16px; border: 1px solid #cbd5e0; border-radius: 8px; resize: vertical; }
+    button { margin-top: 12px; padding: 12px 30px; background: #4f46e5; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; width: 100%; }
+    button:hover { background: #4338ca; }
+    .result { margin-top: 30px; padding: 24px; background: white; border-radius: 12px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .emotion { font-size: 36px; font-weight: bold; color: #4f46e5; }
+    .emoji { font-size: 60px; display: block; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <h1>🧠 Emotion Detection</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <textarea name="text" placeholder="Type any text here...">{{ text }}</textarea>
+    <button type="submit">Detect Emotion</button>
+  </form>
+  {% if result %}
+  <div class="result">
+    <span class="emoji">{{ result.emoji }}</span>
+    <div class="emotion">{{ result.emotion }}</div>
+    <p style="color: #718096; margin-top: 8px;">Detected emotion from your text</p>
+  </div>
+  {% endif %}
+</body>
+</html>
